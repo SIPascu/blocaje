@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+          html,
+body {
+         padding: 0;
+         margin: 0;
+         height: 100%;
+         }
+		  .mapFullScreen {
+         position: absolute;
+         width: 100%;
+         height: 100%;
+         }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map" class="mapFullScreen"></div>
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/drumuri_1.js"></script>
+        <script src="data/zoneblocate_2.js"></script>
+        <script src="data/zone_blocate_3.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[44.41543723173847,26.09778537679023],[44.42412490583113,26.111769319955716]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_lightgray_0');
+        map.getPane('pane_lightgray_0').style.zIndex = 400;
+        var layer_lightgray_0 = L.tileLayer('https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png', {
+            pane: 'pane_lightgray_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_lightgray_0;
+        map.addLayer(layer_lightgray_0);
+        function pop_drumuri_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_drumuri_1_0() {
+            return {
+                pane: 'pane_drumuri_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(193,193,193,1.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_drumuri_1');
+        map.getPane('pane_drumuri_1').style.zIndex = 401;
+        map.getPane('pane_drumuri_1').style['mix-blend-mode'] = 'normal';
+        var layer_drumuri_1 = new L.geoJson(json_drumuri_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_drumuri_1',
+            layerName: 'layer_drumuri_1',
+            pane: 'pane_drumuri_1',
+            onEachFeature: pop_drumuri_1,
+            style: style_drumuri_1_0,
+        });
+        bounds_group.addLayer(layer_drumuri_1);
+        map.addLayer(layer_drumuri_1);
+        function pop_zoneblocate_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DN'] !== null ? autolinker.link(feature.properties['DN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_zoneblocate_2_0() {
+            return {
+                pane: 'pane_zoneblocate_2',
+                opacity: 1,
+                color: 'rgba(247,247,247,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,167,10,1.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_zoneblocate_2');
+        map.getPane('pane_zoneblocate_2').style.zIndex = 402;
+        map.getPane('pane_zoneblocate_2').style['mix-blend-mode'] = 'normal';
+        var layer_zoneblocate_2 = new L.geoJson(json_zoneblocate_2, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_zoneblocate_2',
+            layerName: 'layer_zoneblocate_2',
+            pane: 'pane_zoneblocate_2',
+            onEachFeature: pop_zoneblocate_2,
+            style: style_zoneblocate_2_0,
+        });
+        bounds_group.addLayer(layer_zoneblocate_2);
+        map.addLayer(layer_zoneblocate_2);
+        function pop_zone_blocate_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DN'] !== null ? autolinker.link(feature.properties['DN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_zone_blocate_3_0() {
+            return {
+                pane: 'pane_zone_blocate_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,22,1,1.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_zone_blocate_3');
+        map.getPane('pane_zone_blocate_3').style.zIndex = 403;
+        map.getPane('pane_zone_blocate_3').style['mix-blend-mode'] = 'normal';
+        var layer_zone_blocate_3 = new L.geoJson(json_zone_blocate_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_zone_blocate_3',
+            layerName: 'layer_zone_blocate_3',
+            pane: 'pane_zone_blocate_3',
+            onEachFeature: pop_zone_blocate_3,
+            style: style_zone_blocate_3_0,
+        });
+        bounds_group.addLayer(layer_zone_blocate_3);
+        map.addLayer(layer_zone_blocate_3);
+        setBounds();
+        </script>
+    </body>
+</html>
